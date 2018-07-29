@@ -21,6 +21,8 @@ def encrypt(entry):
             entry[i] = 65 + ((ord(entry[i])-65)+key)%26
         elif entry[i].isdigit():
             entry[i] = 48 + ((ord(entry[i])-48)+key)%10
+        else:
+            entry[i] = 65 + ((ord(entry[i])-65)+key)%26
     res = "".join([chr(x) for x in entry])
     f = open("keys.txt", "a")
     f.write("\n{} {}".format(key,"".join(res)))
@@ -36,6 +38,8 @@ def decrypt(entry,key):
             entry[i] = 65 + ((ord(entry[i])-65)-key)%26
         elif entry[i].isdigit():
             entry[i] = 48 + ((ord(entry[i])-48)-key)%10
+        else:
+            entry[i] = 65 + ((ord(entry[i])-65)+key)%26
 
     res =  "".join([chr(x) for x in entry])
     return res
