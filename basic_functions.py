@@ -4,40 +4,40 @@ from basic_functions import *
 import time
 import sys
 
-def encrypt(passw):
+def encrypt(entry):
 
-    if passw=="":
+    if entry=="":
         print("\nInvalid input entered, enter again: "),
         return encrypt(input())
     key = randint(1,26)
 
 
-    passw = list(passw)
+    entry = list(entry)
 
-    for i in range(len(passw)):
-        if passw[i].islower():
-            passw[i] = 97 + ((ord(passw[i])-97)+key)%26
-        elif passw[i].isupper():
-            passw[i] = 65 + ((ord(passw[i])-65)+key)%26
-        elif passw[i].isdigit():
-            passw[i] = 48 + ((ord(passw[i])-48)+key)%10
-    res = "".join([chr(x) for x in passw])
+    for i in range(len(entry)):
+        if entry[i].islower():
+            entry[i] = 97 + ((ord(entry[i])-97)+key)%26
+        elif entry[i].isupper():
+            entry[i] = 65 + ((ord(entry[i])-65)+key)%26
+        elif entry[i].isdigit():
+            entry[i] = 48 + ((ord(entry[i])-48)+key)%10
+    res = "".join([chr(x) for x in entry])
     f = open("keys.txt", "a")
     f.write("\n{} {}".format(key,"".join(res)))
     f.close()
     return res
 
-def decrypt(passw,key):
-    passw = list(passw)
-    for i in range(len(passw)):
-        if passw[i].islower():
-            passw[i] = 97 + ((ord(passw[i])-97)-key)%26
-        elif passw[i].isupper():
-            passw[i] = 65 + ((ord(passw[i])-65)-key)%26
-        elif passw[i].isdigit():
-            passw[i] = 48 + ((ord(passw[i])-48)-key)%10
+def decrypt(entry,key):
+    entry = list(entry)
+    for i in range(len(entry)):
+        if entry[i].islower():
+            entry[i] = 97 + ((ord(entry[i])-97)-key)%26
+        elif entry[i].isupper():
+            entry[i] = 65 + ((ord(entry[i])-65)-key)%26
+        elif entry[i].isdigit():
+            entry[i] = 48 + ((ord(entry[i])-48)-key)%10
 
-    res =  "".join([chr(x) for x in passw])
+    res =  "".join([chr(x) for x in entry])
     return res
 
 def decrypt_main():
@@ -46,8 +46,8 @@ def decrypt_main():
 
         while True:
             try:
-                passw = str(input())
-                if len(passw)<1:
+                entry = str(input())
+                if len(entry)<1:
                     return inp_de()
                 break
             except:
@@ -63,7 +63,7 @@ def decrypt_main():
             except:
                 print("\nInvalid input,number expected")
                 continue
-        return decrypt(passw,key)
+        return decrypt(entry,key)
 
     def list_de():
         f = open("keys.txt","r")
@@ -117,13 +117,13 @@ def decrypt_main():
                     time.sleep(0.01)
                 continue
         time.sleep(0.01)
-        print("\nThe decrypted password is: "),
+        print("\nThe decrypted entry is: "),
         for x in decrypt(l[x][1],key):
             sys.stdout.write(x)
             sys.stdout.flush()
             time.sleep(0.075)
 
-        print("\nDo you wish to delete the password from keys.txt? (y/n):"),
+        print("\nDo you wish to delete the entry from keys.txt? (y/n):"),
         while True:
             try:
                 x = str(input())
