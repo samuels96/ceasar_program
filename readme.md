@@ -1,3 +1,3 @@
-Simple function which encrypts text using caesar cipher.
+Simple program that encrypts text using caesar cipher and stores it in keys.txt, from which it thereafter can be decrypted.
 
-Encrypted values get stored in keys.txt with along with its offset (key).
+![Alt Text](https://i.imgur.com/NBIRsfa.gif)
